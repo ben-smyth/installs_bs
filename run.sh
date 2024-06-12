@@ -17,6 +17,15 @@ if [[ "$RESPONSE" =~ ^[Yy]$ ]]; then
     INIT=true
 fi
 
+if !$INIT; then
+    read -p "Pull Latest Repository Changes [Y/n]: " -n 1 -r PULL
+    if [[ "$PULL" =~ ^[Yy]$ ]]; then
+        PULL_CHANGES=true
+    else
+        PULL_CHANGES=false
+    fi
+fi
+
 if [[ $reply -eq 0 ]]
 then
     if $INIT; then

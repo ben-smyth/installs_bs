@@ -43,12 +43,19 @@ setup_ssh() {
     else
         echo "No existing SSH keys found. Generating a new SSH key..."
 
+        mkdir -p $SSH_DIR
+
         key_file="id_rsa"
         ssh-keygen -t "rsa" -b 4096 -f "$SSH_DIR/$key_file" -N ""
         
+        sudo chmod 700 ~/.ssh
+        sudo chmod 600 ~/.ssh/id_rsa
+        sudo chmod 644 ~/.ssh/id_rsa.pub
+
         # Start the SSH agent and add the new key
         eval "$(ssh-agent -s)"
-        ssh-add "$SSH_DIR/$key_file"
+        ssh-add
+        ssh-keyscan github.com >> "$SSH_DIR/known_hosts"
 
         echo "SSH key generated and added to SSH agent."
     fi
@@ -61,7 +68,7 @@ clone_or_pull() {
         git -C ~/installs_bs pull
     else
         echo "Cloning repository fresh..."
-        GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@github.com:ben-smyth/installs_bs.git ~/installs_bs 
+        git clone git@github.com:ben-smyth/installs_bs.git ~/installs_bs 
     fi
 }
 
