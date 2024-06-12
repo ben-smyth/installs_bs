@@ -7,6 +7,7 @@ This will have the added benefit of quickly installing new systems too.
 
 An essential element of this project, is that it will be reconcilable in nature. If I run my script on a half-baked system, it will bring it to be fully-baked. If I run it on a fully-baked system, it wont do anything.
 
+
 ## SH
 Shell is the one common, OS-level, dependency among all.
 
@@ -20,8 +21,12 @@ Brew will hopefully cover most of my needs, especially for MacOS - however I kno
 
 Brew has the added benefit of having `--cask`, which allows me to install desktop applications for MacOS.
 
-
 ## WSL
+
+init (from fresh)
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
 - [ ] Install BREW
 - [ ] Install STOW
