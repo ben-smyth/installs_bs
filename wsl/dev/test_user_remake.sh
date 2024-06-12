@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# set -euo
+set -euo pipefail
+
 echo 'script to remove WSL user and create a new one'
 
 # sudo deluser --remove-home bentest
@@ -8,3 +9,5 @@ echo 'script to remove WSL user and create a new one'
 # else
 #     echo 'User bentest not removed'
 # fi
+
+sudo adduser bentest --ingroup sudo
