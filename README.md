@@ -25,7 +25,7 @@ Brew has the added benefit of having `--cask`, which allows me to install deskto
 
 init (from fresh)
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/wsl/scripts/install_dependencies.sh)"
 ```
 
 - [ ] Install BREW
