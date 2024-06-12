@@ -61,7 +61,7 @@ clone_or_pull() {
         git -C ~/installs_bs pull
     else
         echo "Cloning repository fresh..."
-        git clone git@github.com:ben-smyth/installs_bs.git ~/installs_bs 
+        GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git clone git@github.com:ben-smyth/installs_bs.git ~/installs_bs 
     fi
 }
 
