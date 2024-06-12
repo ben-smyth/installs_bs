@@ -44,7 +44,7 @@ setup_ssh() {
         echo "No existing SSH keys found. Generating a new SSH key..."
 
         key_file="id_rsa"
-        ssh-keygen -t "id_rsa" -b 4096 -f "$SSH_DIR/$key_file" -N ""
+        ssh-keygen -t "rsa" -b 4096 -f "$SSH_DIR/$key_file" -N ""
         
         # Start the SSH agent and add the new key
         eval "$(ssh-agent -s)"
