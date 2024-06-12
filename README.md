@@ -7,10 +7,10 @@ This will have the added benefit of quickly installing new systems too.
 
 An essential element of this project, is that it will be reconcilable in nature. If I run my script on a half-baked system, it will bring it to be fully-baked. If I run it on a fully-baked system, it wont do anything.
 
-## WSL
+## INITIALIZE (any OS)
 init (from fresh)
 ```
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/wsl/scripts/install_dependencies.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/run.sh)"
 ```
 
 
