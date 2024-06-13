@@ -21,6 +21,10 @@ install_zoxide() {
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 }
 
+set_zsh_default() {
+
+}
+
 echo "[DEP] Installing apt packages..."
 
 sudo apt-get update -y
@@ -68,5 +72,13 @@ if ! install_zoxide; then
     echo "[DEP] Continuing..."
 fi
 
-echo "[DEP] Setting ZSH as the default terminal for ${USER}..."
-chsh -s $(which zsh)
+echo "[DEP] Cloning TMUX TPM"
+if ! (git clone  https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm); then
+    echo "[DEP] TMUX TPM already exists"
+else
+    echo "[DEP] TMUX TPM Installed to ~/.tmux/plugins/tpm"
+fi
+
+
+echo "[DEP] Setting ZSH as the default terminal for ${USER} if not already..."
+sudo usermod --shell $(which zsh) ${USER}

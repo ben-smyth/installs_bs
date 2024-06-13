@@ -4,6 +4,10 @@ updateDotFiles() {
     source ${HOME}/.zshrc
 }
 
+run_script() {
+    ${HOME}/installs_bs/run.sh
+}
+
 getCheatSheet() {
     # remind me of critical hotkeys
 
@@ -11,6 +15,7 @@ getCheatSheet() {
 
 alias dfup='updateDotFiles'
 alias show='getCheatSheet'
+alias binstall='run_script'
 
 
 ## ALIASES
