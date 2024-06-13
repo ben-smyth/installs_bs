@@ -67,3 +67,6 @@ if ! install_zoxide; then
     echo "[DEP] Zoxide installation failed - manually install from https://github.com/ajeetdsouza/zoxide"
     echo "[DEP] Continuing..."
 fi
+
+echo "[DEP] Setting ZSH as the default terminal for ${USER}..."
+chsh -s $(which zsh)
