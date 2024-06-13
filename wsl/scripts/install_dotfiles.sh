@@ -20,4 +20,4 @@ else
     exit 1
 fi
 
-source $(/usr/bin/env zsh)
+exec /usr/bin/env zsh
