@@ -11,3 +11,12 @@ if !(stow -V); then
 fi
 
 echo "[DOT] STOW install found..."
+# DELETE STOW MAPPING: stow --dir dotfiles/ -D .
+
+if stow --dir $HOME/installs_bs/dotfiles --target $HOME/. .; then
+    echo "[DOT] STOW links added"
+    exit 0
+else
+    echo "[DOT] STOW links failed"
+    exit 1
+fi

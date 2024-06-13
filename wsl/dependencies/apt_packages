@@ -6,4 +6,5 @@ docker-compose
 fzf
 zsh
 neovim
+unzip
 stow

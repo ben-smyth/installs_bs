@@ -43,3 +43,6 @@ if !(brew -v); then
 else
     echo "[DEP] Installing Homebrew packages..."
 fi
+
+
+echo "[DEP] Installing NerdFont 
