@@ -10,6 +10,18 @@ install_homebrew() {
     chmod +w /home/linuxbrew/.linuxbrew/Homebrew
 }
 
+install_nerdfont() {
+    wget -P ~/.local/share/fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip \
+    && cd ~/.local/share/fonts \
+    && unzip -n JetBrainsMono.zip \
+    && rm JetBrainsMono.zip \
+    && fc-cache -fv
+}
+
+install_zoxide() {
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+}
+
 echo "[DEP] Installing apt packages..."
 
 sudo apt-get update -y
@@ -45,4 +57,14 @@ else
 fi
 
 
-echo "[DEP] Installing NerdFont 
+echo "[DEP] Installing NerdFont"
+if ! install_nerdfont; then
+    echo "[DEP] NerdFont installation failed - manually install from https://www.nerdfonts.com/"
+    echo "[DEP] Continuing..."
+fi
+
+echo "[DEP] Installing zoxide"
+if ! install_zoxide; then
+    echo "[DEP] Zoxide installation failed - manually install from https://github.com/ajeetdsouza/zoxide"
+    echo "[DEP] Continuing..."
+fi

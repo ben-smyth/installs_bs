@@ -15,8 +15,9 @@ echo "[DOT] STOW install found..."
 
 if stow --dir $HOME/installs_bs/dotfiles --target $HOME/. .; then
     echo "[DOT] STOW links added"
-    exit 0
 else
     echo "[DOT] STOW links failed"
     exit 1
 fi
+
+source $(/usr/bin/env zsh)

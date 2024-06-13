@@ -9,4 +9,14 @@ getCheatSheet() {
 }
 
 alias dfup='updateDotFiles'
-alias cheatsheet='getCheatSheet'
+alias show='getCheatSheet'
+
+
+## ALIASES
+alias vi='vim'
+
+## GIT
+alias gcm='git commit -m'
+alias gcma='git commit -am'
+alias gs='git status'
+alias gpo='git push origin'
