@@ -1,7 +1,7 @@
 updateDotFiles() {
     # function to update my dotfiles by git pulling and running install
     git -C ${HOME}/installs_bs pull
-    exec /usr/bin/env zsh
+    source ${HOME}/.zshrc
 }
 
 getCheatSheet() {

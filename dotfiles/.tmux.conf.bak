@@ -1,0 +1,92 @@
+# PLUGINS
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+
+# MISC
+set -g mouse on
+# sane scrolling:
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e; send-keys -M'"
+
+# reloading
+bind r source-file ~/.tmux.conf
+
+# for vim
+set -g @resurrect-strategy-vim 'session'
+# for neovim
+set -g @resurrect-strategy-nvim 'session'
+
+run '~/.tmux/plugins/tpm/tpm'
+
+# PREFIX REBIND
+unbind C-b
+set-option -g prefix C-Space
+bind-key C-Space send-prefix
+
+set-option -g history-limit 5000
+set -g default-terminal "tmux-256color"
+
+# NVIM / VIM SWITCHING
+# decide whether we're in a Vim process
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+    | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
+bind-key -n 'C-h' if-shell "$is_vim" 'send-keys C-h' 'select-pane -L'
+bind-key -n 'C-j' if-shell "$is_vim" 'send-keys C-j' 'select-pane -D'
+bind-key -n 'C-k' if-shell "$is_vim" 'send-keys C-k' 'select-pane -U'
+bind-key -n 'C-l' if-shell "$is_vim" 'send-keys C-l' 'select-pane -R'
+
+tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+
+if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
+    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
+if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
+    "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
+
+bind-key -n 'C-Space' if-shell "$is_vim" 'send-keys C-Space' 'select-pane -t:.+'
+
+bind-key -T copy-mode-vi 'C-h' select-pane -L
+bind-key -T copy-mode-vi 'C-j' select-pane -D
+bind-key -T copy-mode-vi 'C-k' select-pane -U
+bind-key -T copy-mode-vi 'C-l' select-pane -R
+bind-key -T copy-mode-vi 'C-\' select-pane -l
+bind-key -T copy-mode-vi 'C-Space' select-pane -t:.+
+
+
+# OTHER REBINDS
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+
+# DESIGN
+# clock mode
+setw -g clock-mode-colour colour123
+
+# copy mode
+setw -g mode-style 'fg=colour1 bg=colour18 bold'
+
+# pane borders
+set -g pane-border-style 'fg=colour123'
+set -g pane-active-border-style 'fg=colour250'
+
+# statusbar
+set -g status-position bottom
+set -g status-justify left
+set -g status-style 'fg=colour123'
+set -g status-left ''
+set -g status-right '%Y-%m-%d %H:%M '
+set -g status-right-length 50
+set -g status-left-length 10
+
+setw -g window-status-current-style 'fg=colour0 bg=colour123 bold'
+setw -g window-status-current-format ' #I #W #F '
+
+setw -g window-status-style 'fg=colour123 dim'
+setw -g window-status-format ' #I #[fg=colour255]#W #[fg=colour250]#F '
+
+setw -g window-status-bell-style 'fg=colour123 bg=colour1 bold'
+
+# messages
+set -g message-style 'fg=colour240 dim bg=colour123 bold'
