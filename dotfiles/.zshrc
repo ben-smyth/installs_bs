@@ -84,4 +84,4 @@ export PATH=$PATH:/usr/local/go/bin:/home/bsmyth/go/bin/
 
 # Shell integrations
 # eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+# eval "$(zoxide init --cmd cd zsh)"
