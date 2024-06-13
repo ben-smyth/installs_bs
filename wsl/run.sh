@@ -29,26 +29,23 @@ read -p "
 [1] Install Dependencies Only
 [2] Install Dotfiles Only
 
-Please Provide a Number: " -n 1 -r
+Please Provide a Number: " -n 1 -r WSLREPLY
 echo
-if [[ $reply -eq 0 ]]
-then
+if [[ $WSLREPLY -eq 0 ]]; then
     echo "installing everything..."
     $HOME/installs_bs/wsl/scripts/install_dependencies.sh
     $HOME/installs_bs/wsl/scripts/install_dotfiles.sh
-    exit
+    exit 0
 fi
 
-if [[ $reply -eq 1 ]]
-then
+if [[ $WSLREPLY -eq 1 ]]; then
     echo "installing dependencies only..."
     $HOME/installs_bs/wsl/scripts/install_dependencies.sh
-    exit
+    exit 0
 fi
 
-if [[ $reply -eq 2 ]]
-then
+if [[ $WSLREPLY -eq 2 ]]; then
     echo "installing dotfiles only..."
     $HOME/installs_bs/wsl/scripts/install_dotfiles.sh
-    exit
+    exit 0
 fi

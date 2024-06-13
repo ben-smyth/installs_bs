@@ -5,3 +5,5 @@ docker.io
 docker-compose
 fzf
 zsh
+neovim
+stow

@@ -8,25 +8,25 @@ read -p "
 [1] UBUNTU
 [2] MACOS
 
-Please Provide a Number: " -n 1 -r
+Please Provide a Number: " -n 1 -r INSTALL_RESPONSE
 echo
-read -p "Full Initialization [y/N]: " -n 1 -r RESPONSE
+read -p "Full Initialization [y/N]: " -n 1 -r INIT_RESPONSE
 echo
-if [[ "$RESPONSE" =~ ^[Yy]$ ]]; then
+if [[ "$INIT_RESPONSE" =~ ^[Yy]$ ]]; then
     echo "Running full initialization..."
     INIT=true
 fi
 
-if [[ ! $INIT ]]; then
-    read -p "Pull Latest Repository Changes [Y/n]: " -n 1 -r PULL
-    if [[ "$PULL" =~ ^[Yy]$ ]]; then
+if [ $INIT = false ]; then
+    read -p "Pull Latest Repository Changes [Y/n]: " -n 1 -r PULL_RESPONSE
+    if [[ "$PULL_RESPONSE" =~ ^[Yy]$ ]]; then
         PULL_CHANGES=true
     else
         PULL_CHANGES=false
     fi
 fi
 
-if [[ $reply -eq 0 ]]
+if [[ $INSTALL_RESPONSE -eq 0 ]]
 then
     if $INIT; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/wsl/scripts/init.sh)"
@@ -35,7 +35,7 @@ then
     $HOME/installs_bs/wsl/run.sh
 fi
 
-if [[ $reply -eq 1 ]]
+if [[ $INSTALL_RESPONSE -eq 1 ]]
 then
     if $INIT; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/ubuntu/scripts/init.sh)"
@@ -44,7 +44,7 @@ then
     $HOME/installs_bs/ubuntu/run.sh
 fi
 
-if [[ $reply -eq 2 ]]
+if [[ $INSTALL_RESPONSE -eq 2 ]]
 then
     if $INIT; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/macos/scripts/init.sh)"

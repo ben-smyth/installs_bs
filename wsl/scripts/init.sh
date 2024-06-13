@@ -5,20 +5,12 @@
 
 set -euo pipefail
 
-# install brew
-install_homebrew() {
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || return 1
-    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.bashrc
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    sudo chown -R :sudo /home/linuxbrew/.linuxbrew/Homebrew
-    chmod +w /home/linuxbrew/.linuxbrew/Homebrew
-}
 
-# set basic git settings
-configure_git() {
-    git config --global user.email "ben.df.smyth@gmail.com"
-    git config --global user.name "ben-smyth"
-}
+# # set basic git settings for clone
+# configure_git() {
+#     git config --global user.email "ben.df.smyth@gmail.com"
+#     git config --global user.name "ben-smyth"
+# }
 
 # check for ssh key - create if doesn't exist
 setup_ssh() {
@@ -53,7 +45,7 @@ setup_ssh() {
         sudo chmod 644 ~/.ssh/id_rsa.pub
 
         # Start the SSH agent and add the new key
-        eval "$(ssh-agent -s)"
+        eval `ssh-agent`
         ssh-add
         ssh-keyscan github.com >> "$SSH_DIR/known_hosts"
 
@@ -76,15 +68,11 @@ clone_or_pull() {
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
-echo "Installing Homebrew..."
-if ! install_homebrew; then
-    echo "Homebrew installation failed, continuing..."
-fi
 
-echo "Doing basic GIT configuration..."
-if ! configure_git; then
-    echo "Git configuration failed, continuing..."
-fi
+# echo "Doing basic GIT configuration..."
+# if ! configure_git; then
+#     echo "Git configuration failed, continuing..."
+# fi
 
 eval $(cat ~/.bashrc)
 
