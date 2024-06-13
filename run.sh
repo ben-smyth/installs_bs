@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 INIT=false
 
+pull_git_changes() {
+    git -C ${HOME}/installs_bs pull
+}
+
 read -p "
 -- INSTALLS_BS --
 
@@ -32,6 +36,9 @@ then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/wsl/scripts/init.sh)"
         exit
     fi
+    if $PULL_CHANGES; then
+        pull_git_changes
+    fi
     $HOME/installs_bs/wsl/run.sh
 fi
 
@@ -41,6 +48,9 @@ then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/ubuntu/scripts/init.sh)"
         exit
     fi
+    if $PULL_CHANGES; then
+        pull_git_changes
+    fi
     $HOME/installs_bs/ubuntu/run.sh
 fi
 
@@ -49,6 +59,9 @@ then
     if $INIT; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/macos/scripts/init.sh)"
         exit
+    fi
+    if $PULL_CHANGES; then
+        pull_git_changes
     fi
     $HOME/installs_bs/macos/run.sh
 fi

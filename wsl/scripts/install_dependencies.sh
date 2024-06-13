@@ -6,8 +6,7 @@ install_homebrew() {
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || return 1
     (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.bashrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    sudo chown -R :sudo /home/linuxbrew/.linuxbrew/Homebrew
-    chmod +w /home/linuxbrew/.linuxbrew/Homebrew
+    sudo chown -R :sudo $(brew --prefix)/*   
 }
 
 install_nerdfont() {
