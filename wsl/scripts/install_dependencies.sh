@@ -21,10 +21,6 @@ install_zoxide() {
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 }
 
-set_zsh_default() {
-
-}
-
 echo "[DEP] Installing apt packages..."
 
 sudo apt-get update -y
@@ -59,7 +55,6 @@ else
     echo "[DEP] Installing Homebrew packages..."
 fi
 
-
 echo "[DEP] Installing NerdFont"
 if ! install_nerdfont; then
     echo "[DEP] NerdFont installation failed - manually install from https://www.nerdfonts.com/"
@@ -78,7 +73,6 @@ if ! (git clone  https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm); then
 else
     echo "[DEP] TMUX TPM Installed to ~/.tmux/plugins/tpm"
 fi
-
 
 echo "[DEP] Setting ZSH as the default terminal for ${USER} if not already..."
 sudo usermod --shell $(which zsh) ${USER}

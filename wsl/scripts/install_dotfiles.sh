@@ -8,7 +8,7 @@ prepare_tmux() {
     tmux new-session -d
 
     # install the plugins
-    ${HOME}/tmux/plugins/tpm/scripts/install_plugins.sh
+    TMUX_PLUGIN_MANAGER_PATH=${HOME}/.tmux/plugins/ ${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
 
     # killing the server is not required, I guess
     tmux kill-server
@@ -34,9 +34,9 @@ else
 fi
 
 
-echo "[DOT] Installing TMUX TPM plugins..."
-if ! prepare_tmux; then
-    echo "[DOT] Preparing TMUX failed. Be ready to manually install plugins. LEADER+I"
-fi
+# echo "[DOT] Installing TMUX TPM plugins..."
+# if ! prepare_tmux; then
+#     echo "[DOT] Preparing TMUX failed. Be ready to manually install plugins. LEADER+I"
+# fi
 
 exec /usr/bin/env zsh
