@@ -7,7 +7,8 @@ set -euo pipefail
 
 
 # set basic git settings for clone
-configure_git() {
+install_and_configure_git() {
+    sudo apt-get install git -y
     git config --global user.email "ben.df.smyth@gmail.com"
     git config --global user.name "ben-smyth"
 }
@@ -62,10 +63,10 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 
-# echo "Doing basic GIT configuration..."
-# if ! configure_git; then
-#     echo "Git configuration failed, continuing..."
-# fi
+echo "Doing basic GIT installation and configuration..."
+if ! install_and_configure_git; then
+    echo "Git install and configuration failed, continuing..."
+fi
 
 eval $(cat ~/.bashrc)
 

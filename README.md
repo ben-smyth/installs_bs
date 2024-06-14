@@ -2,9 +2,15 @@
 Tired of not having what I need on EVERY device.
 
 ## RUN (WSL,MACOS,UBUNTU)
-### RUN (ANY)
+### RUN (ANY UNIX)
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/run.sh)"
+```
+
+### RUN (WINDOWS PACKAGES)
+```
+powershell -Command "Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ben-smyth/installs_bs/main/windows/run.psm1'))"
+
 ```
 
 ## GNU STOW
