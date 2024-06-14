@@ -1,5 +1,6 @@
 $chocolateyPackages = @(
     'googlechrome'
+    'vscode'
 )
 
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -20,5 +21,5 @@ if (!(Get-Command choco -ErrorAction SilentlyContinue)) {
 }
 
 foreach ($package in $chocolateyPackages ) {
-    choco install $package -y
+    choco install $package -y --ignore-checksums
 }
