@@ -1,6 +1,7 @@
 $chocolateyPackages = @(
     'googlechrome'
     'vscode'
+    'obsidian'
 )
 
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
