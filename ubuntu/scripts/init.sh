@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Init script for WSL host without any pre-installed software.
+# Init script for ubuntu host without any pre-installed software.
 #
 
 set -euo pipefail
@@ -84,8 +84,8 @@ if ! clone_or_pull; then
     echo "[INIT] Git repo reconciliation failed, unable to continue."
     echo
     echo "[INIT] To continue, manually reocncile https://github.com/ben-smyth/installs_bs"
-    echo "[INIT] Then, run \$HOME/installs_bs/wsl/scripts/run.sh"
+    echo "[INIT] Then, run \$HOME/installs_bs/ubuntu/scripts/run.sh"
     exit 1
 fi
 
-(cd ${HOME}/installs_bs/ && ./wsl/run.sh --no-touch)
+(cd ${HOME}/installs_bs/ && ./ubuntu/run.sh --no-touch)

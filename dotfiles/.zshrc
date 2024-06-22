@@ -5,6 +5,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [ "$TMUX" = "" ]; then tmux; fi
+
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   # If you're using macOS, you'll want this enabled
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -80,7 +82,7 @@ alias c='clear'
 
 # PATH
 export PATH=$PATH:/home/bsmyth/.local/bin 
-export PATH=$PATH:/usr/local/go/bin:/home/bsmyth/go/bin/
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
 
 # Shell integrations
 # eval "$(fzf --zsh)"

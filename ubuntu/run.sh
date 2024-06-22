@@ -17,35 +17,35 @@ done
 
 if $NO_TOUCH; then
     echo "Running hands off install of everything..."
-    $HOME/installs_bs/wsl/scripts/install_dependencies.sh
-    $HOME/installs_bs/wsl/scripts/install_dotfiles.sh
+    $HOME/installs_bs/ubuntu/scripts/install_dependencies.sh
+    $HOME/installs_bs/ubuntu/scripts/install_dotfiles.sh
     exit 0
 fi
 
 read -p "
--- Install Scripts for WSL --
+-- Install Scripts for UBUNTU --
 
 [0] Install Everything
 [1] Install Dependencies Only
 [2] Install Dotfiles Only
 
-Please Provide a Number: " -n 1 -r WSLREPLY
+Please Provide a Number: " -n 1 -r UBUNTUREPLY
 echo
-if [[ $WSLREPLY -eq 0 ]]; then
+if [[ $UBUNTUREPLY -eq 0 ]]; then
     echo "installing everything..."
-    $HOME/installs_bs/wsl/scripts/install_dependencies.sh
-    $HOME/installs_bs/wsl/scripts/install_dotfiles.sh
+    $HOME/installs_bs/ubuntu/scripts/install_dependencies.sh
+    $HOME/installs_bs/ubuntu/scripts/install_dotfiles.sh
     exit 0
 fi
 
-if [[ $WSLREPLY -eq 1 ]]; then
+if [[ $UBUNTUREPLY -eq 1 ]]; then
     echo "installing dependencies only..."
-    $HOME/installs_bs/wsl/scripts/install_dependencies.sh
+    $HOME/installs_bs/ubuntu/scripts/install_dependencies.sh
     exit 0
 fi
 
-if [[ $WSLREPLY -eq 2 ]]; then
+if [[ $UBUNTUREPLY -eq 2 ]]; then
     echo "installing dotfiles only..."
-    $HOME/installs_bs/wsl/scripts/install_dotfiles.sh
+    $HOME/installs_bs/ubuntu/scripts/install_dotfiles.sh
     exit 0
 fi

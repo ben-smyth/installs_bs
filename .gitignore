@@ -1,1 +1,10 @@
 dotfiles/.config/tmux/plugins/
+
+# by default ignore everything inside config
+dotfiles/.config/*
+
+# whitelist the files
+!dotfiles/.config/tmux/*
+!dotfiles/.config/nvim/*
+!dotfiles/.config/alacritty.toml
+!dotfiles/.config/.p10k.zsh
