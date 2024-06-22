@@ -83,7 +83,8 @@ alias c='clear'
 # PATH
 export PATH=$PATH:/home/bsmyth/.local/bin 
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
+export EDITOR=nvim
 
 # Shell integrations
-# eval "$(fzf --zsh)"
-# eval "$(zoxide init --cmd cd zsh)"
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"

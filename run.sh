@@ -8,7 +8,6 @@ pull_git_changes() {
 read -p "
 -- INSTALLS_BS --
 
-[0] WSL
 [1] UBUNTU
 [2] MACOS
 
@@ -28,18 +27,6 @@ if [ $INIT = false ]; then
     else
         PULL_CHANGES=false
     fi
-fi
-
-if [[ $INSTALL_RESPONSE -eq 0 ]]
-then
-    if $INIT; then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/wsl/scripts/init.sh)"
-        exit
-    fi
-    if $PULL_CHANGES; then
-        pull_git_changes
-    fi
-    $HOME/installs_bs/wsl/run.sh
 fi
 
 if [[ $INSTALL_RESPONSE -eq 1 ]]

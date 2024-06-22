@@ -4,7 +4,6 @@ jq
 ripgrep
 docker.io
 docker-compose
-fzf
 zsh
 neovim
 unzip
