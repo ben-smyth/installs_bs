@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+WSL=false
+
+if [[ $(grep -i Microsoft /proc/version) ]]; then
+    echo "[DEP] System is WSL... setting relevant vars"
+    WSL=true
+fi
+
 # install brew
 install_homebrew() {
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || return 1
-    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.bashrc
+    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/.zshrc
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     sudo chown -R :sudo $(brew --prefix)/*   
 }
@@ -19,6 +26,14 @@ install_nerdfont() {
 
 install_zoxide() {
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+}
+
+install_vscode() {
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    rm -f packages.microsoft.gpg
+    sudo apt update
+    sudo apt install code -y
 }
 
 echo "[DEP] Installing apt packages..."
@@ -74,5 +89,21 @@ else
     echo "[DEP] TMUX TPM Installed to ~/.tmux/plugins/tpm"
 fi
 
+if $WSL; then
+    echo "[DEP] Skipping VSCode due to WSL"
+else 
+    if (code --version); then
+        echo "[DEP] VSCode already installed"
+    else
+        if (install_vscode); then
+            echo "[DEP] Installed VSCode via apt"
+        else
+            echo "[DEP] VSCode install failed. Please install VSCode manually: https://code.visualstudio.com/docs/?dv=linux64cli"
+        fi
+    fi
+fi
+
+
 echo "[DEP] Setting ZSH as the default terminal for ${USER} if not already..."
+
 sudo usermod --shell $(which zsh) ${USER}
