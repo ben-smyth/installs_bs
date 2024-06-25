@@ -41,7 +41,9 @@ zinit snippet OMZP::command-not-found
 # Load completions
 # autoload -Uz compinit && compinit
 
-zinit cdreplay -q
+if [ "$(uname)" = "Linux" ]; then
+    zinit cdreplay -q
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
@@ -84,10 +86,13 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
 export EDITOR=nvim
 
 # Shell integrations
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+
+if [ "$(uname)" = "Linux" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    eval "$(zoxide init --cmd cd zsh)"
+fi
 
 if [ -z "$TMUX" ]; then
   exec tmux new-session -A -s workspace

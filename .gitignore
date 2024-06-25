@@ -9,4 +9,3 @@ dotfiles/.config/*
 !dotfiles/.config/alacritty.toml
 !dotfiles/.config/.p10k.zsh
 !dotfiles/.config/Code/User/settings.json
-
