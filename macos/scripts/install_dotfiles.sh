@@ -11,7 +11,7 @@ fi
 echo "[DOT] STOW install found..."
 
 
-if stow --dir $HOME/installs_bs/dotfiles --target $HOME/. .; then
+if stow --adopt --dir $HOME/installs_bs/dotfiles --target $HOME/. .; then
     echo "[DOT] STOW links added"
 else
     echo "[DOT] STOW links failed. Exiting."

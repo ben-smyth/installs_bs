@@ -83,10 +83,13 @@ alias c='clear'
 # PATH
 export PATH=$PATH:/home/bsmyth/.local/bin 
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
+
+# VARS
 export EDITOR=nvim
+export TERM=xterm-256color
+unset COLORTERM # breaks k9s if set
 
 # Shell integrations
-
 eval "$(fzf --zsh)"
 
 if [ "$(uname)" = "Linux" ]; then

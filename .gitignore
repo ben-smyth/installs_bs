@@ -5,7 +5,11 @@ dotfiles/.config/*
 
 # whitelist the files required
 !dotfiles/.config/tmux/*
+!dotfiles/.config/tmux
 !dotfiles/.config/nvim/*
+!dotfiles/.config/nvim
+!dotfiles/.config/k9s/*
+!dotfiles/.config/k9s
+
 !dotfiles/.config/alacritty.toml
 !dotfiles/.config/.p10k.zsh
-!dotfiles/.config/Code/User/settings.json
