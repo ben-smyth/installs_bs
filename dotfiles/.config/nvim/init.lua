@@ -35,7 +35,6 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  'xiyaowong/transparent.nvim',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
       {
@@ -87,15 +86,6 @@ require('lazy').setup({
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
-{
-	  "okuuva/auto-save.nvim",
-	  cmd = "ASToggle", -- optional for lazy loading on command
-	  event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
-	  opts = {
-	    -- your config goes here
-	    -- or just leave it empty :)
-  }
-},
   {
   "ray-x/go.nvim",
   dependencies = {  -- optional packages
@@ -693,55 +683,6 @@ vim.diagnostic.config({
   severity_sort = false,
 })
 
--- Transparent background 
-require("transparent").setup({ -- Optional, you don't have to run setup.
-  groups = { -- table: default groups
-    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
-    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
-    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-    'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
-    'EndOfBuffer',
-  },
-  extra_groups = {
-    "NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
-    "NvimTreeNormal", -- NvimTree
-    "j-hui/fidget.nvim"
-  },
-  exclude_groups = {"fidget","neodev"}, -- table: groups you don't want to clear
-})
-
-require('transparent').clear_prefix('NvimTree')
-require('transparent').clear_prefix('lualine')
-require('transparent').clear_prefix('romgrk/barbar.nvim')
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-map('n','<TAB>',':BufferNext<CR>',opts)
-map('n','<S-TAB>',':BufferPrevious<CR>',opts)
--- map('n', '<C-h>', '<C-w>h', opts)
--- map('n', '<C-j>', '<C-w>j', opts)
--- map('n', '<C-k>', '<C-w>k', opts)
--- map('n', '<C-l>', '<C-w>l', opts)
-map('n', 'T', ':Telescope live_grep<CR>', opts)
-vim.cmd('command! Bcr BufferCloseBuffersRight')
-vim.cmd('command! Bca BufferCloseAllButCurrent')
-vim.cmd('command! Bc BufferClose')
-vim.cmd('command! Nvt NvimTreeToggle')
-vim.cmd('command! Nvr NvimTreeRefresh')
-vim.cmd('command! GIF GoIfErr')
-vim.cmd('command! T Telescope find_files')
-vim.cmd('command! LG LazyGit')
-
--- vim.cmd[[
---   hi Normal guibg=NONE ctermbg=NONE
---   hi EndOfBuffer guibg=NONE ctermbg=NONE
---   hi StatusLine guibg=NONE ctermbg=NONE
---   hi NonText guibg=NONE ctermbg=NONE
---   ]]
--- vim.cmd[[
---   autocmd VimEnter * hi NvimTreeNormal guibg=NONE ctermbg=NONE
---   autocmd VimEnter * hi BufferTabpageFill guibg=NONE ctermbg=NONE
---   autocmd VimEnter * hi BufferCurrent guibg=NONE ctermbg=NONE
--- ]]
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
@@ -752,3 +693,23 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 
+-- 
+-- BINDINGS
+--
+require('transparent').clear_prefix('NvimTree')
+require('transparent').clear_prefix('lualine')
+require('transparent').clear_prefix('romgrk/barbar.nvim')
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+map('n','<TAB>',':BufferNext<CR>',opts)
+map('n','<S-TAB>',':BufferPrevious<CR>',opts)
+map('n', 'T', ':Telescope live_grep<CR>', opts)
+map('n', 'F', ':Telescope find_files<CR>', opts)
+map('n', '<C-s>', ':NvimTreeToggle<CR>',opts)
+vim.cmd('command! Bcr BufferCloseBuffersRight')
+vim.cmd('command! Bca BufferCloseAllButCurrent')
+vim.cmd('command! Bc BufferClose')
+vim.cmd('command! Nvt NvimTreeToggle')
+vim.cmd('command! Nvr NvimTreeRefresh')
+vim.cmd('command! GIF GoIfErr')
+vim.cmd('command! LG LazyGit')

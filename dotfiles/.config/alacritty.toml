@@ -125,15 +125,15 @@ hide_when_typing = true
 action = "PasteSelection"
 mouse = "Middle"
 
-[[keyboard.bindings]]
-key = "V"
-mods = "Control"
-action = "Paste"
-
-[[keyboard.bindings]]
-key = "C"
-mods = "Control"
-action = "Copy"
+# [[keyboard.bindings]]
+# key = "V"
+# mods = "Control"
+# action = "Paste"
+#
+# [[keyboard.bindings]]
+# key = "C"
+# mods = "Control"
+# action = "Copy"
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>"
