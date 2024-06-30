@@ -87,18 +87,18 @@ require('lazy').setup({
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
   {
-  "ray-x/go.nvim",
-  dependencies = {  -- optional packages
-    "ray-x/guihua.lua",
-    "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
-  },
-  config = function()
-    require("go").setup()
-  end,
-  event = {"CmdlineEnter"},
-  ft = {"go", 'gomod'},
-  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  -- "ray-x/go.nvim",
+  -- dependencies = {  -- optional packages
+  --   "ray-x/guihua.lua",
+  --   "neovim/nvim-lspconfig",
+  --   "nvim-treesitter/nvim-treesitter",
+  -- },
+  -- config = function()
+  --   require("go").setup()
+  -- end,
+  -- event = {"CmdlineEnter"},
+  -- ft = {"go", 'gomod'},
+  -- build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 },
   {
     -- Autocompletion
@@ -252,6 +252,15 @@ require('lazy').setup({
   },
 
   {
+    "okuuva/auto-save.nvim",
+    cmd = "ASToggle", -- optional for lazy loading on command
+    event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
+    opts = {
+      -- your config goes here
+      -- or just leave it empty :)
+    },
+  },
+  {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -353,6 +362,16 @@ require('telescope').setup {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
+    },
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case',
+      '--hidden',
     },
   },
 }
@@ -559,7 +578,9 @@ require('which-key').register({
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
-require('mason-lspconfig').setup()
+require('mason-lspconfig').setup {
+  ensure_installed = {'gopls'}
+}
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -571,7 +592,7 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
@@ -598,7 +619,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
+  ensure_installed = vim.tbl_keys(servers)
 }
 
 mason_lspconfig.setup_handlers {
@@ -704,7 +725,7 @@ local opts = { noremap = true, silent = true }
 map('n','<TAB>',':BufferNext<CR>',opts)
 map('n','<S-TAB>',':BufferPrevious<CR>',opts)
 map('n', 'T', ':Telescope live_grep<CR>', opts)
-map('n', 'F', ':Telescope find_files<CR>', opts)
+map('n', 'F', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", opts)
 map('n', '<C-s>', ':NvimTreeToggle<CR>',opts)
 vim.cmd('command! Bcr BufferCloseBuffersRight')
 vim.cmd('command! Bca BufferCloseAllButCurrent')
