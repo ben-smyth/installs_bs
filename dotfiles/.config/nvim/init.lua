@@ -76,6 +76,17 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+    },
+    config = function()
+      -- require("your.null-ls.config") -- require your null-ls config here (example below)
+    end,
+  },
   {'romgrk/barbar.nvim',
     dependencies = {
       'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
@@ -87,18 +98,18 @@ require('lazy').setup({
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
   {
-  -- "ray-x/go.nvim",
-  -- dependencies = {  -- optional packages
-  --   "ray-x/guihua.lua",
-  --   "neovim/nvim-lspconfig",
-  --   "nvim-treesitter/nvim-treesitter",
-  -- },
-  -- config = function()
-  --   require("go").setup()
-  -- end,
-  -- event = {"CmdlineEnter"},
-  -- ft = {"go", 'gomod'},
-  -- build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  "ray-x/go.nvim",
+  dependencies = {  -- optional packages
+    "ray-x/guihua.lua",
+    "neovim/nvim-lspconfig",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  config = function()
+    require("go").setup()
+  end,
+  event = {"CmdlineEnter"},
+  ft = {"go", 'gomod'},
+  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 },
   {
     -- Autocompletion
@@ -578,8 +589,10 @@ require('which-key').register({
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
+
+-- mason lsp declaration
 require('mason-lspconfig').setup {
-  ensure_installed = {'gopls'}
+  ensure_installed = {'gopls','html'}
 }
 
 -- Enable the following language servers
@@ -596,7 +609,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
@@ -713,6 +726,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = format_sync_grp,
 })
 
+-- more declarative Mason stuff
+require("mason-null-ls").setup({
+    ensure_installed = { "stylua", "jq", "yq"}
+})
 
 -- 
 -- BINDINGS
