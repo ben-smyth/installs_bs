@@ -592,7 +592,7 @@ require('mason').setup()
 
 -- mason lsp declaration
 require('mason-lspconfig').setup {
-  ensure_installed = {'gopls','html'}
+  ensure_installed = {'gopls','html', 'ast_grep'}
 }
 
 -- Enable the following language servers
@@ -605,6 +605,7 @@ require('mason-lspconfig').setup {
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
+  ast_grep = {},
   gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},

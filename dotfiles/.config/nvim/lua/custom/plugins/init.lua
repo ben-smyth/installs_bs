@@ -6,4 +6,8 @@ return {
   -- Transparent background 
   'xiyaowong/transparent.nvim',
 
+  -- My custom neovim plugin
+  {
+    dir="~/GIT/kustomize.nvim"
+  },
 }
