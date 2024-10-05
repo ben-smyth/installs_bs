@@ -36,10 +36,16 @@ install_vscode() {
     sudo apt install code -y
 }
 
-echo "[DEP] Installing apt packages..."
+install_darktable_repo() {
+    echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/xUbuntu_24.04/ /' | sudo tee /etc/apt/sources.list.d/graphics:darktable.list
+    curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/xUbuntu_24.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg > /dev/null
+}
 
-sudo apt-get update -y
-sudo apt-get upgrade -y
+echo "[DEP] Installing DarkTable repo"
+if ! install_darktable_repo; then
+    echo "[DEP] DarkTable repo install failed, see: https://software.opensuse.org/download.html?project=graphics:darktable&package=darktable"
+    echo "[DEP] Continuing..."
+fi
 
 # Adding apt repositories
 xargs sudo add-apt-repository -y < $HOME/installs_bs/ubuntu/dependencies/apt_repositories
@@ -47,6 +53,10 @@ xargs sudo add-apt-repository -y < $HOME/installs_bs/ubuntu/dependencies/apt_rep
 # Adding apt packages
 xargs sudo apt-get install -y < $HOME/installs_bs/ubuntu/dependencies/apt_packages
 
+echo "[DEP] Installing apt packages..."
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
 GOLANG_VER=go1.22.4.linux-amd64
 GOLANG_BIN=/usr/local/go/bin/go
