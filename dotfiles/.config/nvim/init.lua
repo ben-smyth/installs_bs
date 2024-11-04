@@ -736,7 +736,6 @@ require("mason-null-ls").setup({
 -- BINDINGS
 --
 require('transparent').clear_prefix('NvimTree')
-require('transparent').clear_prefix('lualine')
 require('transparent').clear_prefix('romgrk/barbar.nvim')
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
