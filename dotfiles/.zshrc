@@ -100,3 +100,5 @@ fi
 if [ -z "$TMUX" ]; then
   # exec tmux new-session -A -s workspace
 fi
+
+export GOPATH="$HOME/go"
