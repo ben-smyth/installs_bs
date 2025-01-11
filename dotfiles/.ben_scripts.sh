@@ -34,6 +34,7 @@ alias binstall='run_script'
 
 ## ALIASES
 alias vi='vim'
+alias cat='bat'
 
 ## GIT
 alias gcm='git commit -m'
