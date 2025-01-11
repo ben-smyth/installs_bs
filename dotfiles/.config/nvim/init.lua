@@ -37,45 +37,45 @@ require('lazy').setup({
   'tpope/vim-sleuth',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
-      {
-        "kdheepak/lazygit.nvim",
-        -- optional for floating window border decoration
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-    { 'alexghergh/nvim-tmux-navigation', config = function()
-
-      local nvim_tmux_nav = require('nvim-tmux-navigation')
-
-      nvim_tmux_nav.setup {
-        disable_when_zoomed = true -- defaults to false
-      }
-
-      vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-      vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-      vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-      vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-      vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-      vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
-
-    end
-    },
-    },{
-    -- LSP Configuration & Plugins
-    'neovim/nvim-lspconfig',
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-
-      -- Useful status updates for LSP
-      -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      "nvim-lua/plenary.nvim",
     },
+    {
+      'alexghergh/nvim-tmux-navigation',
+      config = function()
+        local nvim_tmux_nav = require('nvim-tmux-navigation')
+
+        nvim_tmux_nav.setup {
+          disable_when_zoomed = true -- defaults to false
+        }
+
+        vim.keymap.set('n', "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+        vim.keymap.set('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+        vim.keymap.set('n', "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+        vim.keymap.set('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+        vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+        vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+      end
+    },
+  }, {
+  -- LSP Configuration & Plugins
+  'neovim/nvim-lspconfig',
+  dependencies = {
+    -- Automatically install LSPs to stdpath for neovim
+    { 'williamboman/mason.nvim', config = true },
+    'williamboman/mason-lspconfig.nvim',
+
+    -- Useful status updates for LSP
+    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+    { 'j-hui/fidget.nvim',       opts = {} },
+
+    -- Additional lua configuration, makes nvim stuff amazing!
+    'folke/neodev.nvim',
   },
+},
   {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -87,9 +87,12 @@ require('lazy').setup({
       -- require("your.null-ls.config") -- require your null-ls config here (example below)
     end,
   },
-  {'romgrk/barbar.nvim',
+  { 'echasnovski/mini.nvim',       version = '*' },
+  { "nvim-tree/nvim-web-devicons", opts = {} },
+  {
+    'romgrk/barbar.nvim',
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'lewis6991/gitsigns.nvim',     -- OPTIONAL: for git status
       'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
     },
     init = function() vim.g.barbar_auto_setup = false end,
@@ -98,19 +101,19 @@ require('lazy').setup({
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
   {
-  "ray-x/go.nvim",
-  dependencies = {  -- optional packages
-    "ray-x/guihua.lua",
-    "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", 'gomod' },
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
-  config = function()
-    require("go").setup()
-  end,
-  event = {"CmdlineEnter"},
-  ft = {"go", 'gomod'},
-  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-},
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -129,7 +132,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -264,7 +267,7 @@ require('lazy').setup({
 
   {
     "okuuva/auto-save.nvim",
-    cmd = "ASToggle", -- optional for lazy loading on command
+    cmd = "ASToggle",                         -- optional for lazy loading on command
     event = { "InsertLeave", "TextChanged" }, -- optional for lazy loading on trigger events
     opts = {
       -- your config goes here
@@ -279,12 +282,23 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false, -- Recommended
+    -- ft = "markdown" -- If you decide to lazy-load anyway
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    }
+  },
+  { "nvim-neotest/nvim-nio" },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -457,71 +471,71 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
- vim.defer_fn(function()
-   require('nvim-treesitter.configs').setup {
-     -- Add languages to be installed here that you want installed for treesitter
-     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash','puppet','groovy' },
- 
-     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-     auto_install = false,
- 
-     highlight = { enable = true },
-     indent = { enable = true },
-     incremental_selection = {
-       enable = true,
-       keymaps = {
-         init_selection = '<c-space>',
-         node_incremental = '<c-space>',
-         scope_incremental = '<c-s>',
-         node_decremental = '<M-space>',
-       },
-     },
-     textobjects = {
-       select = {
-         enable = true,
-         lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-         keymaps = {
-           -- You can use the capture groups defined in textobjects.scm
-           ['aa'] = '@parameter.outer',
-           ['ia'] = '@parameter.inner',
-           ['af'] = '@function.outer',
-           ['if'] = '@function.inner',
-           ['ac'] = '@class.outer',
-           ['ic'] = '@class.inner',
-         },
-       },
-       move = {
-         enable = true,
-         set_jumps = true, -- whether to set jumps in the jumplist
-         goto_next_start = {
-           [']m'] = '@function.outer',
-           [']]'] = '@class.outer',
-         },
-         goto_next_end = {
-           [']M'] = '@function.outer',
-           [']['] = '@class.outer',
-         },
-         goto_previous_start = {
-           ['[m'] = '@function.outer',
-           ['[['] = '@class.outer',
-         },
-         goto_previous_end = {
-           ['[M'] = '@function.outer',
-           ['[]'] = '@class.outer',
-         },
-       },
-       swap = {
-         enable = true,
-         swap_next = {
-           ['<leader>a'] = '@parameter.inner',
-         },
-         swap_previous = {
-           ['<leader>A'] = '@parameter.inner',
-         },
-       },
-     },
-   }
- end, 0)
+vim.defer_fn(function()
+  require('nvim-treesitter.configs').setup {
+    -- Add languages to be installed here that you want installed for treesitter
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'puppet', 'groovy' },
+
+    -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+    auto_install = false,
+
+    highlight = { enable = true },
+    indent = { enable = true },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = '<c-space>',
+        node_incremental = '<c-space>',
+        scope_incremental = '<c-s>',
+        node_decremental = '<M-space>',
+      },
+    },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ['aa'] = '@parameter.outer',
+          ['ia'] = '@parameter.inner',
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@class.outer',
+          ['ic'] = '@class.inner',
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          [']m'] = '@function.outer',
+          [']]'] = '@class.outer',
+        },
+        goto_next_end = {
+          [']M'] = '@function.outer',
+          [']['] = '@class.outer',
+        },
+        goto_previous_start = {
+          ['[m'] = '@function.outer',
+          ['[['] = '@class.outer',
+        },
+        goto_previous_end = {
+          ['[M'] = '@function.outer',
+          ['[]'] = '@class.outer',
+        },
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ['<leader>a'] = '@parameter.inner',
+        },
+        swap_previous = {
+          ['<leader>A'] = '@parameter.inner',
+        },
+      },
+    },
+  }
+end, 0)
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -569,21 +583,29 @@ local on_attach = function(_, bufnr)
 end
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+require('which-key').add {
+  { "<leader>c",  group = "[C]ode" },
+  { "<leader>c_", hidden = true },
+  { "<leader>d",  group = "[D]ocument" },
+  { "<leader>d_", hidden = true },
+  { "<leader>g",  group = "[G]it" },
+  { "<leader>g_", hidden = true },
+  { "<leader>h",  group = "Git [H]unk" },
+  { "<leader>h_", hidden = true },
+  { "<leader>r",  group = "[R]ename" },
+  { "<leader>r_", hidden = true },
+  { "<leader>s",  group = "[S]earch" },
+  { "<leader>s_", hidden = true },
+  { "<leader>t",  group = "[T]oggle" },
+  { "<leader>t_", hidden = true },
+  { "<leader>w",  group = "[W]orkspace" },
+  { "<leader>w_", hidden = true },
 }
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>h'] = { 'Git [H]unk' },
+require('which-key').add({
+  -- ['<leader>'] = { name = 'VISUAL <leader>' },
+  -- ['<leader>h'] = { 'Git [H]unk' },
 }, { mode = 'v' })
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -592,7 +614,7 @@ require('mason').setup()
 
 -- mason lsp declaration
 require('mason-lspconfig').setup {
-  ensure_installed = {'gopls','html'}
+  ensure_installed = { 'gopls', 'html' }
 }
 
 -- Enable the following language servers
@@ -609,7 +631,7 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -704,8 +726,8 @@ cmp.setup {
 -- note: this setting is global and should be set only once
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
   group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
-  callback = function ()
-    vim.diagnostic.open_float(nil, {focus=false})
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
   end
 })
 
@@ -721,17 +743,17 @@ local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.go",
   callback = function()
-   require('go.format').goimport()
+    require('go.format').goimport()
   end,
   group = format_sync_grp,
 })
 
 -- more declarative Mason stuff
 require("mason-null-ls").setup({
-    ensure_installed = { "stylua", "jq", "yq"}
+  ensure_installed = { "stylua", "jq", "yq" }
 })
 
--- 
+--
 -- BINDINGS
 --
 require('transparent').clear_prefix('NvimTree')
@@ -739,11 +761,13 @@ require('transparent').clear_prefix('lualine')
 require('transparent').clear_prefix('romgrk/barbar.nvim')
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
-map('n','<TAB>',':BufferNext<CR>',opts)
-map('n','<S-TAB>',':BufferPrevious<CR>',opts)
+map('n', '<TAB>', ':BufferNext<CR>', opts)
+map('n', '<S-TAB>', ':BufferPrevious<CR>', opts)
 map('n', 'T', ':Telescope live_grep<CR>', opts)
-map('n', 'F', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>", opts)
-map('n', '<C-s>', ':NvimTreeToggle<CR>',opts)
+map('n', 'F',
+  "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
+  opts)
+map('n', '<C-s>', ':NvimTreeToggle<CR>', opts)
 vim.cmd('command! Bcr BufferCloseBuffersRight')
 vim.cmd('command! Bca BufferCloseAllButCurrent')
 vim.cmd('command! Bc BufferClose')

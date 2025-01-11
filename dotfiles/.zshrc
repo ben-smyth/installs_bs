@@ -98,5 +98,7 @@ if [ "$(uname)" = "Linux" ]; then
 fi
 
 if [ -z "$TMUX" ]; then
-  exec tmux new-session -A -s workspace
+  # exec tmux new-session -A -s workspace
 fi
+
+export GOPATH="$HOME/go"
