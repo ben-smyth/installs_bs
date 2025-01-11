@@ -3,11 +3,9 @@ python3
 jq
 ripgrep
 docker.io
-docker-compose
 zsh
 unzip
 fontconfig
 stow
 gcc
 lua5.4
-
