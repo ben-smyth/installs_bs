@@ -29,7 +29,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-# zinit light Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -90,10 +90,10 @@ export TERM=xterm-256color
 unset COLORTERM # breaks k9s if set
 
 # Shell integrations
-eval "$(fzf --zsh)"
 
 if [ "$(uname)" = "Linux" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    eval "$(fzf --zsh)"
     eval "$(zoxide init --cmd cd zsh)"
 fi
 

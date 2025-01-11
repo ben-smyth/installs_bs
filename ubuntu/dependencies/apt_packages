@@ -5,8 +5,9 @@ ripgrep
 docker.io
 docker-compose
 zsh
-neovim
 unzip
 fontconfig
 stow
 gcc
+lua5.4
+protobuf-compiler

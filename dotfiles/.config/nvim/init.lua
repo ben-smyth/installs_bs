@@ -614,7 +614,7 @@ require('mason').setup()
 
 -- mason lsp declaration
 require('mason-lspconfig').setup {
-  ensure_installed = { 'gopls', 'html' }
+  ensure_installed = {'gopls','html', 'ast_grep'}
 }
 
 -- Enable the following language servers
@@ -627,6 +627,7 @@ require('mason-lspconfig').setup {
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
+  ast_grep = {},
   gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
@@ -757,7 +758,6 @@ require("mason-null-ls").setup({
 -- BINDINGS
 --
 require('transparent').clear_prefix('NvimTree')
-require('transparent').clear_prefix('lualine')
 require('transparent').clear_prefix('romgrk/barbar.nvim')
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
