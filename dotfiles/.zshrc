@@ -78,7 +78,19 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 source "$HOME/.ben_scripts.sh"
 alias ls='ls -al --color'
 alias vim='nvim'
+alias vi='nvim'
 alias c='clear'
+alias dfup='updateDotFiles'
+alias show='getCheatSheet'
+alias binstall='run_script'
+alias cat='bat'
+
+## GIT
+alias gcm='git commit -m'
+alias gcma='git commit -am'
+alias gs='git status'
+alias gpo='git push origin'
+alias gp='git pull'
 
 # PATH
 export PATH=$PATH:$HOME/.local/bin 

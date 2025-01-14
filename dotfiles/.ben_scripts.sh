@@ -27,18 +27,3 @@ getCheatSheet() {
 
 }
 
-alias dfup='updateDotFiles'
-alias show='getCheatSheet'
-alias binstall='run_script'
-
-
-## ALIASES
-alias vi='vim'
-alias cat='bat'
-
-## GIT
-alias gcm='git commit -m'
-alias gcma='git commit -am'
-alias gs='git status'
-alias gpo='git push origin'
-alias gp='git pull'
