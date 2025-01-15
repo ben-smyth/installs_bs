@@ -17,4 +17,3 @@ else
     echo "[DOT] STOW links failed. Exiting."
     exit 1
 fi
-	

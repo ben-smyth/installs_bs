@@ -29,7 +29,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -44,9 +44,6 @@ zinit snippet OMZP::command-not-found
 if [ "$(uname)" = "Linux" ]; then
     zinit cdreplay -q
 fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
 
 # Keybindings
 bindkey -e
@@ -71,8 +68,8 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 source "$HOME/.ben_scripts.sh"
@@ -92,6 +89,8 @@ alias gs='git status'
 alias gpo='git push origin'
 alias gp='git pull'
 
+alias bash='/opt/homebrew/bin/bash'
+
 # PATH
 export PATH=$PATH:$HOME/.local/bin 
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
@@ -99,6 +98,9 @@ export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin/
 # VARS
 export EDITOR=nvim
 export TERM=xterm-256color
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 unset COLORTERM # breaks k9s if set
 
 # Shell integrations
@@ -114,3 +116,6 @@ if [ -z "$TMUX" ]; then
 fi
 
 export GOPATH="$HOME/go"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

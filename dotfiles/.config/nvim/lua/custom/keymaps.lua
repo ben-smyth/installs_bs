@@ -5,7 +5,7 @@
 -- Telescope keymaps
 local telescope = require('telescope.builtin')
 local telescope_live_grep_args = require('telescope').extensions.live_grep_args
-vim.keymap.set('n', 'F', function()
+vim.keymap.set('n', '<leader>gf', function()
     telescope.find_files({ initial_mode = "insert", find_command = {'rg', '--files', '--hidden', '-g', '!.git' }}) -- Files in insert mode
 end, { desc = "Find Files Insert Mode)" })
 
@@ -17,8 +17,8 @@ vim.keymap.set('n', '<Tab>', function()
     telescope.buffers({ initial_mode = "normal" }) -- Buffers in normal mode
 end, { desc = "Buffers (Normal Mode)" })
 
+vim.keymap.set('n', 'F', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
@@ -60,7 +60,4 @@ vim.cmd('command! GIF GoIfErr')
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 map('n', '<S-TAB>', ':BufferPrevious<CR>', opts)
-map('n', 'F',
-  "<cmd>lua require'telescope.builtin'.find_files()<cr>",
-  opts)
 map('n', '<C-s>', ':NvimTreeToggle<CR>', opts)
