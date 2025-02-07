@@ -24,9 +24,9 @@ install_nerdfont() {
     && fc-cache -fv
 }
 
-install_zoxide() {
-    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-}
+# install_zoxide() {
+#     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+# }
 
 install_vscode() {
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -76,11 +76,11 @@ if ! install_nerdfont; then
     echo "[DEP] Continuing..."
 fi
 
-echo "[DEP] Installing zoxide"
-if ! install_zoxide; then
-    echo "[DEP] Zoxide installation failed - manually install from https://github.com/ajeetdsouza/zoxide"
-    echo "[DEP] Continuing..."
-fi
+# echo "[DEP] Installing zoxide"
+# if ! install_zoxide; then
+#     echo "[DEP] Zoxide installation failed - manually install from https://github.com/ajeetdsouza/zoxide"
+#     echo "[DEP] Continuing..."
+# fi
 
 echo "[DEP] Cloning TMUX TPM"
 if ! (git clone  https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm); then

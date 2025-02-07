@@ -8,8 +8,8 @@ function my_on_attach(bufnr)
     -- default mappings
     api.config.mappings.default_on_attach(bufnr)
 
-    -- vim.keymap.set("n", "<Tab>", "")
     vim.keymap.set("n", "<Tab>", api.tree.toggle, opts("toggle"))
+    vim.keymap.set("n", "<C-s>", api.node.open.horizontal, opts("horizontal split"))
 end
 
 return {
@@ -43,7 +43,7 @@ return {
                             height = window_h_int,
                         }
                     end,
-                }
+                },
             },
             update_focused_file = {
                 enable = true,

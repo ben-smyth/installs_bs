@@ -29,7 +29,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-# zinit light Aloxaf/fzf-tab
+zinit light Aloxaf/fzf-tab
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -39,7 +39,7 @@ zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
 # Load completions
-# autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit
 
 if [ "$(uname)" = "Linux" ]; then
     zinit cdreplay -q
@@ -68,8 +68,8 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
 source "$HOME/.ben_scripts.sh"
@@ -108,7 +108,7 @@ unset COLORTERM # breaks k9s if set
 if [ "$(uname)" = "Linux" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     eval "$(fzf --zsh)"
-    eval "$(zoxide init --cmd cd zsh)"
+    eval "$(zoxide init)"
 fi
 
 if [ -z "$TMUX" ]; then
@@ -119,3 +119,4 @@ export GOPATH="$HOME/go"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(zoxide init zsh)"
