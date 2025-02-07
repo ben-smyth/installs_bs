@@ -3,14 +3,13 @@ Tired of not having what I need on EVERY device.
 
 ## RUN 
 ### ANY UNIX
-```
+```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ben-smyth/installs_bs/main/run.sh)"
 ```
 
 ### WINDOWS PACKAGES
-```
+```psm1
 powershell -Command "Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/ben-smyth/installs_bs/main/windows/run.psm1'))"
-
 ```
 
 ## GNU STOW

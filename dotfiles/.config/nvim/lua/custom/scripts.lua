@@ -25,6 +25,6 @@ vim.diagnostic.config({
 })
 
 require('transparent').clear_prefix('lualine')
-require('transparent').clear_prefix('nvim-tree')
-require('transparent').clear_prefix('lazy')
-require('transparent').clear_prefix('mason')
+require('transparent').clear_prefix('NvimTree')
+require('transparent').clear_prefix('Lazy')
+require('transparent').clear_prefix('Mason')

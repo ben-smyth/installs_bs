@@ -3,6 +3,7 @@ return {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
+  version = "v0.9.3",
   build = ':TSUpdate',
   event = { 'BufReadPost', 'BufNewFile' },
   config = function()

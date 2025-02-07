@@ -2,8 +2,8 @@ local M = {
 	-- Set lualine as statusline
 	'nvim-lualine/lualine.nvim',
 	-- See `:help lualine.txt`
-	-- event = "VeryLazy",
-	lazy = false,
+	event = "VeryLazy",
+	-- lazy = false,
 }
 
 function M.config()

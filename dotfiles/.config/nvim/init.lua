@@ -29,11 +29,6 @@ require("lazy").setup({
       cache = {
 	enabled = true,
       },
-      rtp = {
-	disabled_plugins = {
-	  "lualine",
-	},
-      },
     },
     debug = false,
   })
@@ -41,14 +36,3 @@ require("lazy").setup({
 
 require("custom.scripts")
 require("custom.keymaps")
-
-require("markview").setup({
-    __inside_code_block = false, -- Do not render Markdown, HTML, or LaTeX inside code blocks
-    filetypes = { "markdown", "quarto", "rmd" }, -- Enable for specific file types
-    injections = { enable = false }, -- Disable Tree-sitter injections to avoid conflicts
-    highlight_groups = "dynamic", -- Use dynamic highlight groups
-    split_conf = { split = "right" }, -- Preview opens to the right
-    initial_state = true, -- Automatically enable previews for new buffers
-    max_file_length = 1000, -- Set max file length for rendering
-    debounce = 100, -- Time in ms to wait before a redraw
-})

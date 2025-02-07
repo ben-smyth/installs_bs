@@ -92,7 +92,16 @@ return {
 
   {
     -- Transparent background 
-    'xiyaowong/transparent.nvim',
+    {
+      'xiyaowong/transparent.nvim',
+      setup = function()
+        extra_groups = {
+          "NvimTreeNormal",
+          "NvimTreeEndOfBuffer",
+          "NvimTreeNormalNC",
+        }
+      end
+    },
   },
     {
       'sainnhe/sonokai',

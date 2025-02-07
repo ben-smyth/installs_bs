@@ -27,12 +27,27 @@ function M.config()
                 i = { -- Insert mode mappings
                     ["<C-v>"] = actions.select_vertical, -- Open in vertical split
                     ["<C-s>"] = actions.select_horizontal, -- Open in horizontal split
+                    ["<Tab>"] = require('telescope.actions').close,
+                    ["<S-Tab>"] = require('telescope.actions').close,
                 },
                 n = { -- Normal mode mappings
                     ["<C-v>"] = actions.select_vertical,
                     ["<C-s>"] = actions.select_horizontal,
-                    ["q"] = require('telescope.actions').close, -- Close Telescope with Q in normal mode
+                    ["<Tab>"] = require('telescope.actions').close,
+                    ["<S-Tab>"] = require('telescope.actions').close,
+                    ["q"] = require('telescope.actions').close, 
                 },
+            },
+            vimgrep_arguments = {
+                "rg",
+                "--color=never",
+                "--no-heading",
+                "--with-filename",
+                "--line-number",
+                "--column",
+                "--smart-case",
+                "--hidden",
+                "--glob", "!.git/*"
             },
         },
     })

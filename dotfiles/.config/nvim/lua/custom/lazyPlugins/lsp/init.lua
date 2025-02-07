@@ -1,3 +1,12 @@
+local declared_servers = {
+	"pyright",
+	"gopls",
+	"lua_ls",
+	"html",
+	"cssls",
+	"bashls"
+}
+
 return {
 	{
 		"ms-jpq/coq_nvim",
@@ -16,7 +25,29 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"ms-jpq/coq_nvim",
 		},
+		version = "v1.6.0",
 		config = function()
+			-- Setup LSP servers with Mason
+			require("mason").setup({
+				ui = {
+					border = "rounded",
+					border_chars = {
+						top = "─",
+						bottom = "─",
+						left = "│",
+						right = "│",
+						top_left = "╭",
+						top_right = "╮",
+						bottom_left = "╰",
+						bottom_right = "╯",
+					},
+				},
+			})
+			require("mason-lspconfig").setup({
+				ensure_installed = declared_servers,
+				automatic_installation = true,
+			})
+
 			-- Require COQ after ensuring settings are applied
 			local coq = require("coq")
 
@@ -37,36 +68,9 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = coq.lsp_ensure_capabilities(capabilities)
 
-			-- Setup LSP servers with Mason
-			require("mason").setup({
-				ui = {
-					border = "rounded",
-					border_chars = {
-						top = "─",
-						bottom = "─",
-						left = "│",
-						right = "│",
-						top_left = "╭",
-						top_right = "╮",
-						bottom_left = "╰",
-						bottom_right = "╯",
-					},
-				},
-			})
-			require("mason-lspconfig").setup({
-				ensure_installed = { 
-					"pyright", 
-					"gopls", 
-					"lua_ls", 
-					"html", 
-					"cssls",
-					"bashls"
-				},
-				automatic_installation = true,
-			})
-
 			-- Configure LSP servers
-			local servers = { "gopls" }
+			local servers = declared_servers
+
 			local lspconfig = require("lspconfig")
 
 			for _, server in ipairs(servers) do

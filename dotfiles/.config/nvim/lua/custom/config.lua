@@ -19,7 +19,7 @@ vim.g.coq_settings = {
     recommended = false,
     jump_to_mark = "",
     bigger_preview = "",
-    manual_complete = "<C-e>",
+    manual_complete = "<C-n>",
   },
   clients = {
     lsp = { enabled = true },
@@ -42,6 +42,3 @@ vim.g.coq_settings = {
     },
   },
 }
-
-
--- Colour Scheme
