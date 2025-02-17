@@ -82,12 +82,16 @@ alias show='getCheatSheet'
 alias binstall='run_script'
 alias cat='bat'
 
+## always use zoxide to cd
+alias cd='z'
+
 ## GIT
 alias gcm='git commit -m'
 alias gcma='git commit -am'
 alias gs='git status'
 alias gpo='git push origin'
 alias gp='git pull'
+alias g="git"
 
 alias bash='/opt/homebrew/bin/bash'
 
